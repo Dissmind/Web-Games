@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/web-games/static/css/main.a617e044.chunk.css",
+    "main.js": "/web-games/static/js/main.d548c0c1.chunk.js",
+    "main.js.map": "/web-games/static/js/main.d548c0c1.chunk.js.map",
+    "runtime-main.js": "/web-games/static/js/runtime-main.e7e3fd1c.js",
+    "runtime-main.js.map": "/web-games/static/js/runtime-main.e7e3fd1c.js.map",
+    "static/js/2.c5e35b02.chunk.js": "/web-games/static/js/2.c5e35b02.chunk.js",
+    "static/js/2.c5e35b02.chunk.js.map": "/web-games/static/js/2.c5e35b02.chunk.js.map",
+    "static/js/3.cb5b42f5.chunk.js": "/web-games/static/js/3.cb5b42f5.chunk.js",
+    "static/js/3.cb5b42f5.chunk.js.map": "/web-games/static/js/3.cb5b42f5.chunk.js.map",
+    "index.html": "/web-games/index.html",
+    "static/css/main.a617e044.chunk.css.map": "/web-games/static/css/main.a617e044.chunk.css.map",
+    "static/js/2.c5e35b02.chunk.js.LICENSE.txt": "/web-games/static/js/2.c5e35b02.chunk.js.LICENSE.txt",
+    "static/media/logo.6ce24c58.svg": "/web-games/static/media/logo.6ce24c58.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.e7e3fd1c.js",
+    "static/js/2.c5e35b02.chunk.js",
+    "static/css/main.a617e044.chunk.css",
+    "static/js/main.d548c0c1.chunk.js"
+  ]
+}
