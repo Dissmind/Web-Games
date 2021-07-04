@@ -1,0 +1,2 @@
+(this["webpackJsonpweb-games"]=this["webpackJsonpweb-games"]||[]).push([[0],{22:function(e,t,n){"use strict";n.r(t);n(0);var c,s=n(6),r=n.n(s),a=n(7),b=n(8),i=n(9),j=n(1),o=i.a.div(c||(c=Object(b.a)(["\n\n"]))),d=function(e){return Object(a.a)(e),Object(j.jsx)(o,{children:Object(j.jsx)("h1",{children:"Test"})})};r.a.render(Object(j.jsx)(d,{}),document.getElementById("root"))}},[[22,1,2]]]);
+//# sourceMappingURL=main.3b239aa0.chunk.js.map
