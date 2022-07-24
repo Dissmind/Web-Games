@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import {useDispatch, useSelector} from "react-redux";
-import {add, testSelector} from "./area.slice";
+import {add, coordinateSelector, headCoordinateSelector, init, step, testSelector} from "./area.slice";
+import {useEffect} from "react";
 
 
 
@@ -19,9 +20,25 @@ export const Snake = () => {
 
 
 const Cell = ({xCoordinate, yCoordinate}) => {
+  const coordinateList = useSelector(coordinateSelector)
+
+  const isEmpty = () => {
+    for (let i = 0; i < coordinateList.length; i++) {
+      const cell = coordinateList[i]
+
+      if (cell.x == xCoordinate && cell.y == yCoordinate) {
+        return false
+      }
+    }
+
+    return true
+  }
+
   return (
     <CellStl>
       x {xCoordinate} | y {yCoordinate}
+
+      {isEmpty() ? "Empty" : "Snake"}
     </CellStl>
   )
 }
@@ -81,6 +98,19 @@ export const Area = () => {
   const dispatch = useDispatch()
 
   const test = useSelector(testSelector)
+
+  const headCoordinate = useSelector(headCoordinateSelector)
+
+  useEffect(() => {
+    dispatch(init())
+
+    setInterval(() => {
+      const payload = {headCoordinate: headCoordinate}
+
+      dispatch(step(payload))
+    }, 4000)
+  }, [])
+
 
   return (
     <div>
