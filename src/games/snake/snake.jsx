@@ -1,4 +1,8 @@
 import styled from 'styled-components'
+import {useDispatch, useSelector} from "react-redux";
+import {add, testSelector} from "./area.slice";
+
+
 
 export const Snake = () => {
 
@@ -21,6 +25,7 @@ const Cell = ({xCoordinate, yCoordinate}) => {
     </CellStl>
   )
 }
+
 
 const Row = ({yCoordinate, cellCount}) => {
 
@@ -73,9 +78,23 @@ export const Area = () => {
     )
   }
 
+  const dispatch = useDispatch()
+
+  const test = useSelector(testSelector)
+
   return (
     <div>
       Area
+
+      <h1>Counter: {test}</h1>
+
+      <button
+        onClick={() => {
+          const payload = {value: 3}
+
+          dispatch(add(payload))
+        }}
+      >ADD</button>
 
       <div>
         {
@@ -92,6 +111,7 @@ export const Area = () => {
 const RowStl = styled.div`
   display: flex;
 `
+
 
 const CellStl = styled.div`
   width: 100px;
