@@ -90,30 +90,27 @@ export const AreaSlice = createSlice({
 
       state.snakeCoordsList.shift()
 
+
+
       switch (state.torwald) {
         case TorwaldEnum.left:
-
+          headCoordinate.x = headCoordinate.x - 1
           break
 
         case TorwaldEnum.top:
-
+          headCoordinate.x = headCoordinate.y + 1
           break
 
         case TorwaldEnum.right:
-          const newXCoordinate = headCoordinate.x + 1
-
-          headCoordinate.x = newXCoordinate
-
-          console.log(newXCoordinate)
-
-          state.snakeCoordsList.push(headCoordinate)
-
+          headCoordinate.x = headCoordinate.x + 1
           break
 
         case TorwaldEnum.bottom:
-
+          headCoordinate.x = headCoordinate.y - 1
           break
       }
+
+      state.snakeCoordsList.push(headCoordinate)
     }
   }
 
