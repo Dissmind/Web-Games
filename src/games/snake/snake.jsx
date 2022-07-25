@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import {useDispatch, useSelector} from "react-redux";
-import {add, coordinateSelector, headCoordinateSelector, init, step, testSelector} from "./area.slice";
+import {coordinateSelector, headCoordinateSelector, init, step, testSelector} from "./area.slice";
 import {useEffect, useState} from "react";
 
 
@@ -118,16 +118,6 @@ export const Area = () => {
   return (
     <div>
       Area
-
-      <h1>Counter: {test}</h1>
-
-      <button
-        onClick={() => {
-          const payload = {value: 3}
-
-          dispatch(add(payload))
-        }}
-      >ADD</button>
 
       <div>
         {

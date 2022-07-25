@@ -12,7 +12,6 @@ export const defaultConfig = {
 }
 
 const initialState = {
-  test: 1,
   snakeCoordsList: [],
 
   config: {
@@ -76,10 +75,6 @@ export const AreaSlice = createSlice({
       }
     },
 
-    add: (state, {payload}) => {
-      state.test += payload.value
-    },
-
     step: (state, {payload}) => {
       const snakeCoordsList = state.snakeCoordsList
       const lastIndexCoordinateList = snakeCoordsList.length - 1
@@ -123,7 +118,6 @@ export const coordinateSelector = (state) => state.area.snakeCoordsList
 
 
 export const {
-  add,
   init,
   step
 } = AreaSlice.actions
