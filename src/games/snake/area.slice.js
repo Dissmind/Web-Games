@@ -1,6 +1,6 @@
 import {createSlice} from "@reduxjs/toolkit";
 
-const TorwaldEnum = {
+export const TorwaldEnum = {
   left: 'left',
   top: 'top',
   right: 'right',
@@ -106,6 +106,11 @@ export const AreaSlice = createSlice({
       }
 
       state.snakeCoordsList.push(headCoordinate)
+    },
+
+
+    setTorwald: (state, {payload}) => {
+      state.torwald = payload.torwald
     }
   }
 
@@ -119,7 +124,8 @@ export const coordinateSelector = (state) => state.area.snakeCoordsList
 
 export const {
   init,
-  step
+  step,
+  setTorwald
 } = AreaSlice.actions
 
 
