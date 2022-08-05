@@ -1,6 +1,6 @@
 import {Row} from "./row";
 import {useDispatch, useSelector} from "react-redux";
-import {headCoordinateSelector, init, setTorwald, step, TorwaldEnum} from "./area.slice";
+import {headCoordinateSelector, init, setTorwald, step, TorwaldEnum, torwaldSelector} from "./area.slice";
 import {useEffect} from "react";
 
 
@@ -37,6 +37,8 @@ export const Area = () => {
 
 
   const headCoordinate = useSelector(headCoordinateSelector)
+  const torwald = useSelector(torwaldSelector)
+
 
   useEffect(() => {
     dispatch(init())
@@ -45,7 +47,7 @@ export const Area = () => {
       const payload = {headCoordinate: headCoordinate}
 
       dispatch(step(payload))
-    }, 4000)
+    }, 2000)
   }, [])
 
 
@@ -70,6 +72,7 @@ export const Area = () => {
       }
     })
   }
+
 
   useEffect(() => {
     controlEvents()

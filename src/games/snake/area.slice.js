@@ -83,17 +83,13 @@ export const AreaSlice = createSlice({
         y: snakeCoordsList[lastIndexCoordinateList].y
       }
 
-      state.snakeCoordsList.shift()
-
-
-
       switch (state.torwald) {
         case TorwaldEnum.left:
           headCoordinate.x = headCoordinate.x - 1
           break
 
         case TorwaldEnum.top:
-          headCoordinate.x = headCoordinate.y + 1
+          headCoordinate.y = headCoordinate.y - 1
           break
 
         case TorwaldEnum.right:
@@ -101,25 +97,48 @@ export const AreaSlice = createSlice({
           break
 
         case TorwaldEnum.bottom:
-          headCoordinate.x = headCoordinate.y - 1
+          headCoordinate.y = headCoordinate.y + 1
           break
       }
 
+      state.snakeCoordsList.shift()
       state.snakeCoordsList.push(headCoordinate)
     },
 
 
     setTorwald: (state, {payload}) => {
-      state.torwald = payload.torwald
+
+      const {torwald} = payload
+
+      if (torwald === TorwaldEnum.top && (state.torwald === TorwaldEnum.left || state.torwald === TorwaldEnum.right)) {
+        state.torwald = torwald
+        return
+      }
+
+      if (torwald === TorwaldEnum.right && (state.torwald === TorwaldEnum.top || state.torwald === TorwaldEnum.bottom)) {
+        state.torwald = torwald
+        return
+      }
+
+      if (torwald === TorwaldEnum.bottom && (state.torwald === TorwaldEnum.right || state.torwald === TorwaldEnum.left)) {
+        state.torwald = torwald
+        return
+      }
+
+      if (torwald === TorwaldEnum.left && (state.torwald === TorwaldEnum.top || state.torwald === TorwaldEnum.bottom)) {
+        state.torwald = torwald
+        return
+      }
+
     }
   }
 
 })
 
 
-export const testSelector = (state) => state.area.test
 export const headCoordinateSelector = (state) => state.area.snakeCoordsList[state.area.snakeCoordsList.length - 1]
 export const coordinateSelector = (state) => state.area.snakeCoordsList
+export const torwaldSelector = (state) => state.torwald
 
 
 export const {
