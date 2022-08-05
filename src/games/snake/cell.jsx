@@ -27,7 +27,7 @@ export const Cell = ({xCoordinate, yCoordinate}) => {
 
   return (
     <CellStl isEmpty={isEmpty}>
-      x {xCoordinate} | y {yCoordinate}
+      {/*x {xCoordinate} | y {yCoordinate}*/}
     </CellStl>
   )
 }
@@ -35,8 +35,8 @@ export const Cell = ({xCoordinate, yCoordinate}) => {
 
 // == Styles ==
 export const CellStl = styled.div`
-  width: 100px;
-  height: 100px;
+  width: 40px;
+  height: 40px;
   border: 1px solid black;
   
   background-color: ${({isEmpty}) => isEmpty ? 'black' : 'white'};

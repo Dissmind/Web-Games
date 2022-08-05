@@ -10,8 +10,8 @@ export const Area = () => {
 
   const renderArea = () => {
 
-    const rowsCount = 10
-    const cellCount = 10
+    const rowsCount = 25
+    const cellCount = 25
 
     const rows = () => {
       const result = []
@@ -37,7 +37,6 @@ export const Area = () => {
 
 
   const headCoordinate = useSelector(headCoordinateSelector)
-  const torwald = useSelector(torwaldSelector)
 
 
   useEffect(() => {
@@ -47,7 +46,7 @@ export const Area = () => {
       const payload = {headCoordinate: headCoordinate}
 
       dispatch(step(payload))
-    }, 2000)
+    }, 500)
   }, [])
 
 

@@ -8,7 +8,7 @@ export const TorwaldEnum = {
 }
 
 export const defaultConfig = {
-  startSnakeWidth: 3
+  startSnakeWidth: 5
 }
 
 const initialState = {
@@ -19,7 +19,6 @@ const initialState = {
   },
 
   torwald: TorwaldEnum.left,
-
 }
 
 
@@ -36,7 +35,7 @@ export const AreaSlice = createSlice({
 
       // set head coordinate
       const headCoordinate = {
-        x: 5,
+        x: 7,
         y: 2
       }
 
