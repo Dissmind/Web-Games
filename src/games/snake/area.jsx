@@ -1,6 +1,14 @@
 import {Row} from "./row";
 import {useDispatch, useSelector} from "react-redux";
-import {headCoordinateSelector, init, setTorwald, step, TorwaldEnum, torwaldSelector} from "./area.slice";
+import {
+  DefaultConfig,
+  headCoordinateSelector,
+  init,
+  setTorwald,
+  step,
+  TorwaldEnum,
+  torwaldSelector
+} from "./area.slice";
 import {useEffect} from "react";
 
 
@@ -10,8 +18,8 @@ export const Area = () => {
 
   const renderArea = () => {
 
-    const rowsCount = 25
-    const cellCount = 25
+    const rowsCount = DefaultConfig.area.width
+    const cellCount = DefaultConfig.area.height
 
     const rows = () => {
       const result = []

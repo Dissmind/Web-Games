@@ -4,6 +4,12 @@ import {useEffect, useState} from "react";
 import styled from "styled-components";
 
 
+export const CellStatusEnum = {
+  empty: 'empty',
+  snake: 'snake',
+  eat: 'eat'
+}
+
 
 export const Cell = ({xCoordinate, yCoordinate}) => {
   const coordinateList = useSelector(coordinateSelector)

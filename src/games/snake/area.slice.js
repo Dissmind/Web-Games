@@ -1,4 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit";
+import {generateRandom} from "../../pure-functions/random";
 
 export const TorwaldEnum = {
   left: 'left',
@@ -7,15 +8,20 @@ export const TorwaldEnum = {
   bottom: 'bottom'
 }
 
-export const defaultConfig = {
-  startSnakeWidth: 5
+export const DefaultConfig = {
+  startSnakeWidth: 5,
+  area: {
+    width: 25,
+    height: 25
+  }
 }
 
 const initialState = {
   snakeCoordsList: [],
+  eatCoordinate: null,
 
   config: {
-    startSnakeWidth: defaultConfig.startSnakeWidth
+    startSnakeWidth: DefaultConfig.startSnakeWidth
   },
 
   torwald: TorwaldEnum.left,
@@ -30,6 +36,7 @@ export const AreaSlice = createSlice({
   initialState,
 
   reducers: {
+
     init: (state, {payload}) => {
       state.torwald = TorwaldEnum.right
 
@@ -40,6 +47,14 @@ export const AreaSlice = createSlice({
       }
 
       state.snakeCoordsList.push(headCoordinate)
+
+      // Generate eat
+      const eatCoordinate = {
+        x: generateRandom(1, DefaultConfig.area.width),
+        y: generateRandom(1, DefaultConfig.area.height)
+      }
+
+      state.eatCoordinate = eatCoordinate
 
         // render snake
       switch (state.torwald) {
@@ -73,6 +88,7 @@ export const AreaSlice = createSlice({
           break
       }
     },
+
 
     step: (state, {payload}) => {
       const snakeCoordsList = state.snakeCoordsList
