@@ -1,5 +1,4 @@
-import {Row} from "./row";
-import {useDispatch, useSelector} from "react-redux";
+import { useDispatch, useSelector } from 'react-redux'
 import {
   DefaultConfig,
   headCoordinateSelector,
@@ -7,13 +6,17 @@ import {
   setTorwald,
   step,
   TorwaldEnum,
-  torwaldSelector
-} from "./area.slice";
-import {useEffect} from "react";
+} from './area.slice'
+import { useEffect } from 'react'
+import { Row } from './row'
 
 
 
 export const Area = () => {
+
+  const dispatch = useDispatch()
+
+  const headCoordinate = useSelector(headCoordinateSelector)
 
 
   const renderArea = () => {
@@ -41,22 +44,6 @@ export const Area = () => {
     )
   }
 
-  const dispatch = useDispatch()
-
-
-  const headCoordinate = useSelector(headCoordinateSelector)
-
-
-  useEffect(() => {
-    dispatch(init())
-
-    setInterval(() => {
-      const payload = {headCoordinate: headCoordinate}
-
-      dispatch(step(payload))
-    }, 500)
-  }, [])
-
 
   const controlEvents = () => {
     document.addEventListener('keydown', (e) => {
@@ -82,8 +69,20 @@ export const Area = () => {
 
 
   useEffect(() => {
+    dispatch(init())
+
+    setInterval(() => {
+      const payload = {headCoordinate: headCoordinate}
+
+      dispatch(step(payload))
+    }, 500)
+  }, [])
+
+
+  useEffect(() => {
     controlEvents()
   }, [])
+
 
 
   return (
