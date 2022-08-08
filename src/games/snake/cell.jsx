@@ -1,7 +1,8 @@
-import {useSelector} from "react-redux";
-import {coordinateSelector} from "./area.slice";
-import {useEffect, useState} from "react";
-import styled from "styled-components";
+import { useSelector } from 'react-redux'
+import { snakeCoordinateSelector } from './area.slice'
+import { useEffect, useState } from 'react'
+import styled from 'styled-components'
+
 
 
 export const CellStatusEnum = {
@@ -11,8 +12,10 @@ export const CellStatusEnum = {
 }
 
 
+
 export const Cell = ({xCoordinate, yCoordinate}) => {
-  const coordinateList = useSelector(coordinateSelector)
+
+  const coordinateList = useSelector(snakeCoordinateSelector)
 
   const [isEmpty, setIsEmpty] = useState(false)
 
@@ -37,6 +40,7 @@ export const Cell = ({xCoordinate, yCoordinate}) => {
     </CellStl>
   )
 }
+
 
 
 // == Styles ==

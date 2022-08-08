@@ -1,5 +1,5 @@
-import {createSlice} from "@reduxjs/toolkit";
-import {generateRandom} from "../../pure-functions/random";
+import {createSlice} from '@reduxjs/toolkit'
+import { generateRandomCoordinate } from '../../pure-functions/random'
 
 export const TorwaldEnum = {
   left: 'left',
@@ -8,13 +8,25 @@ export const TorwaldEnum = {
   bottom: 'bottom'
 }
 
+
 export const DefaultConfig = {
   startSnakeWidth: 5,
   area: {
     width: 25,
     height: 25
+  },
+  eatZoneCoordinates: {
+    max: {
+      maxX: 2,
+      maxY: 2
+    },
+    min: {
+      minX: 24,
+      minY: 24
+    }
   }
 }
+
 
 const initialState = {
   snakeCoordsList: [],
@@ -48,15 +60,9 @@ export const AreaSlice = createSlice({
 
       state.snakeCoordsList.push(headCoordinate)
 
-      // Generate eat
-      const eatCoordinate = {
-        x: generateRandom(1, DefaultConfig.area.width),
-        y: generateRandom(1, DefaultConfig.area.height)
-      }
 
-      state.eatCoordinate = eatCoordinate
 
-        // render snake
+      // render snake
       switch (state.torwald) {
         case TorwaldEnum.left:
 
@@ -87,6 +93,25 @@ export const AreaSlice = createSlice({
 
           break
       }
+
+
+
+      // render eat
+      const areaCoordinate = {
+        maxCoordinate: {
+          maxX: 1,
+          maxY: 1
+        },
+        minCoordinate: {
+          minX: 1,
+          minY: 1
+        }
+      }
+      const limitCoordinateArray = state.snakeCoordsList
+      const eatCoordinate = generateRandomCoordinate(areaCoordinate, limitCoordinateArray)
+
+      state.eatCoordinate = eatCoordinate
+
     },
 
 
@@ -152,7 +177,7 @@ export const AreaSlice = createSlice({
 
 
 export const headCoordinateSelector = (state) => state.area.snakeCoordsList[state.area.snakeCoordsList.length - 1]
-export const coordinateSelector = (state) => state.area.snakeCoordsList
+export const snakeCoordinateSelector = (state) => state.area.snakeCoordsList
 export const torwaldSelector = (state) => state.torwald
 
 
