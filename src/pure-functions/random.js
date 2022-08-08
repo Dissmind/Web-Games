@@ -33,23 +33,3 @@ export const generateRandomCoordinate = (areaCoordinate, limitCoordinateArray) =
 
   return result
 }
-
-
-
-// const areaCoordinate = {
-//   maxCoordinate: {
-//     maxX: 1,
-//     maxY: 2
-//   },
-//   minCoordinate: {
-//     minX: 1,
-//     minY: 2
-//   }
-// }
-//
-// const limitCoordinateArray = [{x: 2, y: 2}, {x: 3, y: 2}, {x: 4, y: 2}, {x: 5, y: 2}]
-//
-// console.log(generateCoordinate(areaCoordinate, limitCoordinateArray))
-
-
-

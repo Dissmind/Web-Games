@@ -16,11 +16,11 @@ export const DefaultConfig = {
     height: 25
   },
   eatZoneCoordinates: {
-    max: {
+    maxCoordinate: {
       maxX: 2,
       maxY: 2
     },
-    min: {
+    minCoordinate: {
       minX: 24,
       minY: 24
     }
@@ -97,18 +97,8 @@ export const AreaSlice = createSlice({
 
 
       // render eat
-      const areaCoordinate = {
-        maxCoordinate: {
-          maxX: 1,
-          maxY: 1
-        },
-        minCoordinate: {
-          minX: 1,
-          minY: 1
-        }
-      }
       const limitCoordinateArray = state.snakeCoordsList
-      const eatCoordinate = generateRandomCoordinate(areaCoordinate, limitCoordinateArray)
+      const eatCoordinate = generateRandomCoordinate(DefaultConfig.eatZoneCoordinates, limitCoordinateArray)
 
       state.eatCoordinate = eatCoordinate
 
@@ -178,6 +168,7 @@ export const AreaSlice = createSlice({
 
 export const headCoordinateSelector = (state) => state.area.snakeCoordsList[state.area.snakeCoordsList.length - 1]
 export const snakeCoordinateSelector = (state) => state.area.snakeCoordsList
+export const eatCoordinateSelector = (state) => state.area.eatCoordinate
 export const torwaldSelector = (state) => state.torwald
 
 
