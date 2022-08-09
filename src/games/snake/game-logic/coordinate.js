@@ -1,6 +1,6 @@
 import {
   generateRandom,
-} from '../../../pure-functions/random'
+} from '../../../pure/random'
 
 
 
