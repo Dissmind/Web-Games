@@ -1,5 +1,6 @@
 import {createSlice} from '@reduxjs/toolkit'
-import { generateRandomCoordinate } from '../../pure-functions/random'
+import { Coordinate } from './game-logic/coordinate'
+
 
 export const TorwaldEnum = {
   left: 'left',
@@ -28,11 +29,13 @@ export const DefaultConfig = {
 }
 
 
+
 const initialState = {
   snakeCoordsList: [],
   eatCoordinate: null,
 
   config: {
+    // TODO: rename to 'length'
     startSnakeWidth: DefaultConfig.startSnakeWidth
   },
 
@@ -40,6 +43,23 @@ const initialState = {
 }
 
 
+
+const eatSpawn = (state, {payload}) => {
+  const limitCoordinateArray = state.snakeCoordsList
+  const eatCoordinate = Coordinate.generateRandomCoordinate(DefaultConfig.eatZoneCoordinates, limitCoordinateArray)
+
+  state.eatCoordinate = eatCoordinate
+}
+
+
+
+const getSnakeHeadCoordinate = (state) => {
+  const snakeCoordsList = state.snakeCoordsList
+  const lastIndexCoordinateList = snakeCoordsList.length - 1
+  const headCoordinate = new Coordinate(snakeCoordsList[lastIndexCoordinateList].x, snakeCoordsList[lastIndexCoordinateList].y)
+
+  return headCoordinate
+}
 
 
 export const AreaSlice = createSlice({
@@ -50,27 +70,26 @@ export const AreaSlice = createSlice({
   reducers: {
 
     init: (state, {payload}) => {
+      // TODO: random torwald
       state.torwald = TorwaldEnum.right
 
       // set head coordinate
-      const headCoordinate = {
-        x: 7,
-        y: 2
-      }
+      const headCoordinate = new Coordinate(7, 2)
 
-      state.snakeCoordsList.push(headCoordinate)
-
+      state.snakeCoordsList.push(headCoordinate.parseToObject())
 
 
       // render snake
       switch (state.torwald) {
         case TorwaldEnum.left:
-
+          // TODO: implement this
           break
+
 
         case TorwaldEnum.top:
-
+          // TODO: implement this
           break
+
 
         case TorwaldEnum.right:
           const startSnakeWidth = state.config.startSnakeWidth
@@ -89,29 +108,20 @@ export const AreaSlice = createSlice({
 
           break
 
-        case TorwaldEnum.bottom:
 
+        case TorwaldEnum.bottom:
+          // TODO: implement this
           break
       }
 
 
-
       // render eat
-      const limitCoordinateArray = state.snakeCoordsList
-      const eatCoordinate = generateRandomCoordinate(DefaultConfig.eatZoneCoordinates, limitCoordinateArray)
-
-      state.eatCoordinate = eatCoordinate
-
+      eatSpawn(state, {payload})
     },
 
 
     step: (state, {payload}) => {
-      const snakeCoordsList = state.snakeCoordsList
-      const lastIndexCoordinateList = snakeCoordsList.length - 1
-      const headCoordinate = {
-        x: snakeCoordsList[lastIndexCoordinateList].x,
-        y: snakeCoordsList[lastIndexCoordinateList].y
-      }
+      const headCoordinate = getSnakeHeadCoordinate(state)
 
       switch (state.torwald) {
         case TorwaldEnum.left:
@@ -131,8 +141,15 @@ export const AreaSlice = createSlice({
           break
       }
 
-      state.snakeCoordsList.shift()
-      state.snakeCoordsList.push(headCoordinate)
+      const eatCoordinate = Coordinate.constructorFromObject(state.eatCoordinate)
+
+      if (!(headCoordinate.isEqual(eatCoordinate))) {
+        state.snakeCoordsList.shift()
+      } else {
+        eatSpawn(state, {payload})
+      }
+
+      state.snakeCoordsList.push(headCoordinate.parseToObject())
     },
 
 
@@ -160,7 +177,10 @@ export const AreaSlice = createSlice({
         return
       }
 
-    }
+    },
+
+
+    eatSpawn
   }
 
 })
