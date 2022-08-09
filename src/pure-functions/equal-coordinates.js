@@ -1,1 +1,0 @@
-export const isEqualCoordinate = (cordFirst, cordSecond) => cordFirst.x == cordSecond && cordFirst.y == cordSecond.y
