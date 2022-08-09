@@ -1,5 +1,6 @@
 import {createSlice} from '@reduxjs/toolkit'
 import { Coordinate } from './game-logic/coordinate'
+import { CheckGameOver } from './game-logic/check-game-over'
 
 
 export const TorwaldEnum = {
@@ -7,6 +8,14 @@ export const TorwaldEnum = {
   top: 'top',
   right: 'right',
   bottom: 'bottom'
+}
+
+
+export const GameStatusEnum = {
+  waitStart: 'wait-start',
+  playing: 'playing',
+  paused: 'paused',
+  gameOver: 'game-over',
 }
 
 
@@ -39,7 +48,9 @@ const initialState = {
     startSnakeWidth: DefaultConfig.startSnakeWidth
   },
 
-  torwald: TorwaldEnum.left,
+  gameStatus: GameStatusEnum.waitStart,
+
+  torwald: TorwaldEnum.left
 }
 
 
@@ -70,6 +81,9 @@ export const AreaSlice = createSlice({
   reducers: {
 
     init: (state, {payload}) => {
+
+      state.gameStatus = GameStatusEnum.playing
+
       // TODO: random torwald
       state.torwald = TorwaldEnum.right
 
@@ -150,6 +164,10 @@ export const AreaSlice = createSlice({
       }
 
       state.snakeCoordsList.push(headCoordinate.parseToObject())
+
+      if (CheckGameOver.isCheck(state.snakeCoordsList)) {
+        state.gameStatus = GameStatusEnum.gameOver
+      }
     },
 
 
@@ -189,7 +207,8 @@ export const AreaSlice = createSlice({
 export const headCoordinateSelector = (state) => state.area.snakeCoordsList[state.area.snakeCoordsList.length - 1]
 export const snakeCoordinateSelector = (state) => state.area.snakeCoordsList
 export const eatCoordinateSelector = (state) => state.area.eatCoordinate
-export const torwaldSelector = (state) => state.torwald
+export const torwaldSelector = (state) => state.area.torwald
+export const gameStatusSelector = (state) => state.area.gameStatus
 
 
 export const {
