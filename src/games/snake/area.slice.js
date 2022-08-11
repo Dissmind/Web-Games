@@ -55,6 +55,7 @@ const initialState = {
 
 
 
+// Actions
 const eatSpawn = (state, {payload}) => {
   const limitCoordinateArray = state.snakeCoordsList
   const eatCoordinate = Coordinate.generateRandomCoordinate(DefaultConfig.eatZoneCoordinates, limitCoordinateArray)
@@ -73,6 +74,67 @@ const getSnakeHeadCoordinate = (state) => {
 }
 
 
+const initAction = (state, {payload}) => {
+
+  state.gameStatus = GameStatusEnum.playing
+
+  // TODO: random torwald
+  state.torwald = TorwaldEnum.right
+
+  // set head coordinate
+  const headCoordinate = new Coordinate(7, 2)
+
+  state.snakeCoordsList.push(headCoordinate.parseToObject())
+
+
+  // render snake
+  switch (state.torwald) {
+    case TorwaldEnum.left:
+      // TODO: implement this
+      break
+
+
+    case TorwaldEnum.top:
+      // TODO: implement this
+      break
+
+
+    case TorwaldEnum.right:
+      const startSnakeWidth = state.config.startSnakeWidth
+      const tailWidth = startSnakeWidth - 1
+
+      for (let i = 1; i <= tailWidth; i++) {
+        const x = headCoordinate.x - i
+
+        const tailCoordinate = {
+          x,
+          y: headCoordinate.y
+        }
+
+        state.snakeCoordsList.unshift(tailCoordinate)
+      }
+
+      break
+
+
+    case TorwaldEnum.bottom:
+      // TODO: implement this
+      break
+  }
+
+
+  // render eat
+  eatSpawn(state, {payload})
+}
+
+
+const restartGameAction = (state) => {
+  state = initialState
+  init(state)
+}
+
+
+
 export const AreaSlice = createSlice({
   name: 'area',
 
@@ -80,58 +142,7 @@ export const AreaSlice = createSlice({
 
   reducers: {
 
-    init: (state, {payload}) => {
-
-      state.gameStatus = GameStatusEnum.playing
-
-      // TODO: random torwald
-      state.torwald = TorwaldEnum.right
-
-      // set head coordinate
-      const headCoordinate = new Coordinate(7, 2)
-
-      state.snakeCoordsList.push(headCoordinate.parseToObject())
-
-
-      // render snake
-      switch (state.torwald) {
-        case TorwaldEnum.left:
-          // TODO: implement this
-          break
-
-
-        case TorwaldEnum.top:
-          // TODO: implement this
-          break
-
-
-        case TorwaldEnum.right:
-          const startSnakeWidth = state.config.startSnakeWidth
-          const tailWidth = startSnakeWidth - 1
-
-          for (let i = 1; i <= tailWidth; i++) {
-            const x = headCoordinate.x - i
-
-            const tailCoordinate = {
-              x,
-              y: headCoordinate.y
-            }
-
-            state.snakeCoordsList.unshift(tailCoordinate)
-          }
-
-          break
-
-
-        case TorwaldEnum.bottom:
-          // TODO: implement this
-          break
-      }
-
-
-      // render eat
-      eatSpawn(state, {payload})
-    },
+    init: initAction,
 
 
     step: (state, {payload}) => {
@@ -198,6 +209,8 @@ export const AreaSlice = createSlice({
     },
 
 
+    restartGame: restartGameAction,
+
     eatSpawn
   }
 
@@ -214,7 +227,8 @@ export const gameStatusSelector = (state) => state.area.gameStatus
 export const {
   init,
   step,
-  setTorwald
+  setTorwald,
+  restartGame
 } = AreaSlice.actions
 
 

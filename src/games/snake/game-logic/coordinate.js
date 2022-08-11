@@ -17,7 +17,6 @@ export class Coordinate {
 
 
 
-
   isEqual(otherCoordinate) {
     return this.x == otherCoordinate.x && this.y == otherCoordinate.y
   }

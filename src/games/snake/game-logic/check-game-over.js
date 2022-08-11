@@ -7,19 +7,10 @@ import { Serialize } from '../../../pure/serialize'
 export class CheckGameOver {
 
   static isCheck(snakeCoordsList) {
-
-
-
-
     const check = (
       this._isCheckSmashSnake(snakeCoordsList) ||
       this._isCheckOverflowArea(snakeCoordsList)
     )
-
-    // TODO: remove this log
-    if (check) {
-      console.log('Game over')
-    }
 
     return check
   }
