@@ -184,6 +184,7 @@ export const AreaSlice = createSlice({
       if (!(headCoordinate.isEqual(eatCoordinate))) {
         state.snakeCoordsList.shift()
       } else {
+        state.score += 1
         eatSpawn(state, {payload})
       }
 

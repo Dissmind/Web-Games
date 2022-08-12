@@ -1,7 +1,7 @@
 import { Area } from './area'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { GameStatusEnum, gameStatusSelector, restartGame, togglePause } from './area.slice'
+import { GameStatusEnum, gameStatusSelector, restartGame, scoreSelector, togglePause } from './area.slice'
 
 
 
@@ -9,6 +9,7 @@ export const Snake = () => {
 
   const dispatch = useDispatch()
   const gameStatus = useSelector(gameStatusSelector)
+  const score = useSelector(scoreSelector)
 
 
   useEffect(() => {
@@ -61,6 +62,8 @@ export const Snake = () => {
       <h1>Snake</h1>
 
       <div>
+        <h4>Score {score}</h4>
+
         <button
           onClick={onPause}
         >{pauseButtonText}</button>
