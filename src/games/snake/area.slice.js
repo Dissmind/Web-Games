@@ -1,4 +1,4 @@
-import {createSlice} from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
 import { Coordinate } from './game-logic/coordinate'
 import { CheckGameOver } from './game-logic/check-game-over'
 

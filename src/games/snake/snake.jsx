@@ -16,9 +16,19 @@ export const Snake = () => {
     }
   }, [gameStatus])
 
+
+  const onPause = () => {
+
+  }
+
+
   return (
     <div>
       <h1>Snake</h1>
+
+      <button
+        onClick={onPause}
+      >Pause</button>
 
       <Area />
     </div>
