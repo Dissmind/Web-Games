@@ -43,6 +43,8 @@ const initialState = {
   snakeCoordsList: [],
   eatCoordinate: null,
 
+  score: 0,
+
   config: {
     // TODO: rename to 'length'
     startSnakeWidth: DefaultConfig.startSnakeWidth
@@ -144,8 +146,19 @@ export const AreaSlice = createSlice({
 
     init: initAction,
 
+    togglePause: (state) => {
+      state.gameStatus = state.gameStatus === GameStatusEnum.paused
+        ? GameStatusEnum.playing
+        : GameStatusEnum.paused
+    },
+
 
     step: (state, {payload}) => {
+
+      if (state.gameStatus !== GameStatusEnum.playing) {
+        return
+      }
+
       const headCoordinate = getSnakeHeadCoordinate(state)
 
       switch (state.torwald) {
@@ -211,7 +224,13 @@ export const AreaSlice = createSlice({
 
     restartGame: restartGameAction,
 
-    eatSpawn
+    eatSpawn,
+
+    plusScore: (state, {payload}) => {
+      const {value} = payload
+
+      state.score += value
+    }
   }
 
 })
@@ -222,13 +241,16 @@ export const snakeCoordinateSelector = (state) => state.area.snakeCoordsList
 export const eatCoordinateSelector = (state) => state.area.eatCoordinate
 export const torwaldSelector = (state) => state.area.torwald
 export const gameStatusSelector = (state) => state.area.gameStatus
+export const scoreSelector = (state) => state.area.score
 
 
 export const {
   init,
   step,
   setTorwald,
-  restartGame
+  restartGame,
+  togglePause,
+  plusScore
 } = AreaSlice.actions
 
 
