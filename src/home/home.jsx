@@ -10,6 +10,10 @@ export const Home = () => {
         <li>
           <Link to={'/snake'}>Snake</Link>
         </li>
+
+        <li>
+          <Link to={'/chess'}>Chess</Link>
+        </li>
       </ul>
     </div>
   )
